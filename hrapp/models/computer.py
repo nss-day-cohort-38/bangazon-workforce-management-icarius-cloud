@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+from .employee import Employee
 
 class Computer(models.Model):
     '''
@@ -11,14 +13,15 @@ class Computer(models.Model):
       employees: This property contains the many to many relationship with the computer/employee model
     '''
 
-    make = models.CharField(max_length=20)
+    make = models.CharField(max_length=25)
+    manufacturer = models.CharField(max_length=25)
     purchase_date = models.DateField()
     decommission_date = models.DateField(null=True, blank=True, default=None)
-    employees = models.ManyToManyField("Employee", through='EmployeeComputer')
+    employees = models.ManyToManyField("Employee", through='EmployeeComputer', null=True)
 
     class Meta:
         verbose_name = ("Computer")
         verbose_name_plural = ("Computers")
 
     def get_absolute_url(self):
-        return reverse("Computer_detail", kwargs={"pk": self.pk})
+        return reverse("computer_detail", kwargs={"pk": self.pk})
