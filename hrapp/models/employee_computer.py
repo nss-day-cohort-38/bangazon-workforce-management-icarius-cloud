@@ -10,4 +10,4 @@ class EmployeeComputer(models.Model):
     employee = models.ForeignKey("Employee", on_delete=models.CASCADE)
     computer = models.ForeignKey("Computer", on_delete=models.CASCADE)
     assign_date = models.DateField()
-    unassigned_date = models.DateField(null = True)
+    unassigned_date = models.DateField(default=None)
