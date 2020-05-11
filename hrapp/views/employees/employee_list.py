@@ -1,12 +1,12 @@
 import sqlite3
 from django.shortcuts import render
 from hrapp.models import Employee
-from ..connection import db_path
+from ..connection import Connection
 
 
 def employee_list(request):
     if request.method == 'GET':
-        with sqlite3.connect(db_path) as conn:
+        with sqlite3.connect(Connection.db_path) as conn:
             conn.row_factory = sqlite3.Row
             db_cursor = conn.cursor()
 
