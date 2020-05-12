@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="{% static 'styles/base.css' %}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{% static 'styles/navbar.css' %}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" type="text/css" media="screen" />
 
     {% block css %}
     {% endblock %}
@@ -25,12 +26,13 @@
         </div>
     </nav>
 
+    <div id="mainContainer" >
+        {% block content %}
+        {% endblock %}
 
-    {% block content %}
-    {% endblock %}
-
-    {% block scripts %}
-    {% endblock scripts %}
+        {% block scripts %}
+        {% endblock scripts %}
+    </div>  
 
 </body>
 
