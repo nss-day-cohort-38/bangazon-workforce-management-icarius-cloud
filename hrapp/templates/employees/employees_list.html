@@ -9,6 +9,7 @@
         <p>{{ employee.first_name }} {{ employee.last_name }}</p>
         Department: {{employee.name}}
     </li>
+    {% comment %} <a class="bangazonButton" href="{% url 'hrapp:employee_details' employee.first_name employee.last_name %}">Details</a> {% endcomment %}
 {% endfor %}
 </ol>
 {% endblock content %}
