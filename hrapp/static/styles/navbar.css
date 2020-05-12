@@ -1,0 +1,39 @@
+#navContainer {
+    height: 50px;
+    width: 100%;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    background-color: #232f3e;
+}
+
+#logo {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    height: 48px;
+
+}
+
+#navLinkContainer{
+    position: absolute;
+    top: 35px;
+    left: 240px;
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.navLink {
+    color: #e6e6e6;
+    text-decoration: none;
+    transition: 0.5s ease;
+    font-size: 15px;
+}
+
+.navLink:hover {
+    color: #fea902;
+    text-decoration: underline;
+    transition: 0.5s ease;
+}
