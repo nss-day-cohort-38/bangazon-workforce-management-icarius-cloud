@@ -29,8 +29,7 @@
     width: 30%;
 }
 
-.listButton {
-}
+
 
 .detailsContainer{
     display: flex;
@@ -63,4 +62,10 @@
 
 .detailsImage{
     width: 50%;
+    max-width: 250px;
+}
+
+.training_program_buttons {
+    display: flex;
+    flex-direction: row;
 }
