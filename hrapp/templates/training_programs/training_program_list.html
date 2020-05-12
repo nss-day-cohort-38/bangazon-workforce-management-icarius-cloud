@@ -1,15 +1,16 @@
-
 {% extends 'shared/base.html' %}
+{% load static %}
 
 {% block content %}
-<h1>Training Programs</h1>
-<a href="{%url 'hrapp:training_program_form' %}">Create New Training Program</a>
-<ol>
+<h1 class="sectionHeader">Training Programs <a class='bangazonButton' href="{%url 'hrapp:training_program_form' %}">Create New Training Program</a></h1>
+
+<section class="listContainer">
 {% for program in future_training_programs %}
-        <li>
-            <p>{{ program }}</p>
-            {{program.start_date}}
-        </li>
+        <div class="listItem">
+             <img class="listImage" src="{% static 'images/training.png' %}">
+             <p>{{program}}</p>
+             <a class='bangazonButton' href="{% url 'hrapp:training_program_details' program.id %}">Details</a>
+        </div>
 {% endfor %}
-</ol>
+</section>
 {% endblock content %}
