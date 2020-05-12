@@ -8,16 +8,16 @@
         {% if employee.is_supervisor %}
             <div class="listItem supervisor">
             <img class="listImage" src="{% static 'images/employee.png' %}">
-            <p>Employee: {{ employee }} (Suprvisor)</p>
-            <p>Department: {{employee.department_name}}
-            {% comment %} <a class="bangazonButton" href="{% url 'hrapp:employee_details' employee %}">Details</a> {% endcomment %}
+            <p>{{ employee }} (Supervisor)</p>
+            <p>Department: {{employee.department_name}}</p>
+            <a class="bangazonButton" href="{% url 'hrapp:employee_details' employee.id %}">Details</a> 
         </div>
         {% else %}
             <div class="listItem">
             <img class="listImage" src="{% static 'images/employee.png' %}">
-            <p>Employee: {{ employee }}</p>
-            <p>Department: {{employee.department_name}}
-            {% comment %} <a class="bangazonButton" href="{% url 'hrapp:employee_details' employee %}">Details</a> {% endcomment %}
+            <p>{{ employee }}</p>
+            <p>Department: {{employee.department_name}}</p>
+            <a class="bangazonButton" href="{% url 'hrapp:employee_details' employee.id %}">Details</a>
         </div>
         {% endif %}
     {% endfor %}
