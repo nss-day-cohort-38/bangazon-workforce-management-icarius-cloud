@@ -2,29 +2,36 @@
 {% load static %}
 
 {% block content %}
-    <h1>{{ training_program.title }}</h1>
-    <h2>Start Date: {{ training_program.start_date}}</h2>
-    <h2>End Date: {{training_program.end_date}}</h2>
-    <h2>Capacity: {{training_program.capacity}}</h2>
-    <h2>Employees: </h2>
-    <ul>
-        {% for employee in employees %}
-        <li>
-            {{employee.first_name}} {{employee.last_name}}
-        </li>
-        {% endfor %}     
-    </ul>
+    <div class="detailsItem">
+        <img class="detailsImage" src="{% static 'images/training.png' %}">
+        <h1>{{ training_program.title }}</h1>
+        <div>
+            <p>Start Date: {{ training_program.start_date}}</p>
+            <p>End Date: {{training_program.end_date}}</p>
+            <p>Capacity: {{training_program.capacity}}</p>
+            <p>Employees: </p>
+            <ul>
+                {% for employee in employees %}
+                <li>
+                    {{employee.first_name}} {{employee.last_name}}
+                </li>
+                {% endfor %}     
+            </ul>
+        </div>
+        <div class="training_program_buttons">
+            
+                <form action="{% url 'hrapp:training_program_edit_form' training_program.id %}" method="GET">
+                        {% csrf_token %}
+                <button class='bangazonButton'>Edit</button>
+                </form>
 
-    <section>
-        <form action="{% url 'hrapp:training_program_edit_form' training_program.id %}" method="GET">
-                {% csrf_token %}
-        <button class='bangazonButton'>Edit</button>
-        </form>
-    </section>
 
-    <form action="{% url 'hrapp:training_program_details' training_program.id %}" method="POST">
-    {% csrf_token %}
-    <input type="hidden" name="actual_method" value="DELETE">
-    <button class='bangazonButton'>Delete</button>
-    </form>
+            <form action="{% url 'hrapp:training_program_details' training_program.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="actual_method" value="DELETE">
+            <button class='bangazonButton'>Delete</button>
+            </form>
+
+        </div>
+    </div>
 {% endblock content %}
