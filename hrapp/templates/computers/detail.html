@@ -1,16 +1,14 @@
+{% extends 'shared/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Bangazon Computer</title>
-  </head>
-  <body>
+
+{% block content %}
+<div class="detailsItem">
+    <img class="detailsImage" src="{% static 'images/computer.png' %}"> 
     <h1>{{ computer.manufacturer }} {{ computer.make }}</h1>
 
     <h3>Purchased: {{ computer.purchase_date }}</h3>
     {% if computer.decommission_date %}
         <h3>Decommissioned on: {{ computer.decommission_date }}</h3>
     {% endif %}
-  </body>
-</html>
+</div>
+{% endblock content %}
