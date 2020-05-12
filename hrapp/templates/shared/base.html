@@ -7,6 +7,8 @@
     <title>Bangazon Workforce Management</title>
 
     <link rel="stylesheet" href="{% static 'styles/base.css' %}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{% static 'styles/navbar.css' %}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" type="text/css" media="screen" />
 
     {% block css %}
     {% endblock %}
@@ -14,11 +16,23 @@
 
 <body>
 
-    {% block content %}
-    {% endblock %}
+    <nav id="navContainer">
+        <a href="{% url 'hrapp:home' %}"><img id="logo" src="{% static 'images/BangazonLogo.png' %}" alt="bangazonLogo"></a>
+        <div id="navLinkContainer">
+            <a class="navLink" href="{% url 'hrapp:employee_list' %}">Employees</a>
+            <a class="navLink" href="{% url 'hrapp:department_list' %}">Departments</a>
+            <a class="navLink" href="{% url 'hrapp:training_program_list' %}">Training</a>
+            <a class="navLink" href="{% url 'hrapp:computers' %}">Computers</a>
+        </div>
+    </nav>
 
-    {% block scripts %}
-    {% endblock scripts %}
+    <div id="mainContainer" >
+        {% block content %}
+        {% endblock %}
+
+        {% block scripts %}
+        {% endblock scripts %}
+    </div>  
 
 </body>
 

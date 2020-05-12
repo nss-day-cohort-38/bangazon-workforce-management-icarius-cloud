@@ -1,0 +1,21 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1>Add Department</h1>
+
+<form action="{% url 'hrapp:department_form' %}" method="post">
+    {% csrf_token %}
+  <fieldset>
+      <label for="name">Name: </label>
+      <input id="name" type="text" name="name">
+  </fieldset>
+  <fieldset>
+      <label for="budget">Budget: </label>
+      <input id="budget" type="float" name="budget">
+  </fieldset>
+  <input type="submit" value="Create Department" />
+</form>
+
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block content %}
+<h1 class="sectionHeader">Departments <a class='bangazonButton' href="{% url 'hrapp:department_form' %}">Add Department</a></h1>
+
+<section class="listContainer">
+{% for department in departments %}
+    <div class="listItem">
+        <img class="listImage" src="{% static 'images/department.png' %}">
+        <p>{{ department.name }} </p>
+        <a class="bangazonButton" href="{% url 'hrapp:department_details' department.name %}">Details</a>
+    </div>
+{% endfor %}
+</section>
+
+{% endblock content %}
