@@ -7,6 +7,9 @@
     <h1>{{ computer.manufacturer }} {{ computer.make }}</h1>
 
     <h3>Purchased: {{ computer.purchase_date }}</h3>
+    {% if assigned_employee %}
+        <h3>Assigned to: {{ assigned_employee }} ({{assigned_employee.department_name}})</h3>
+    {% endif %}
     {% if computer.decommission_date %}
         <h3>Decommissioned on: {{ computer.decommission_date }}</h3>
     {% endif %}

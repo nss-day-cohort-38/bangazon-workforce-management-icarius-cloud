@@ -34,6 +34,7 @@ body {
   transition: 0.5s ease;
   text-align: center;
   font-size: small;
+  cursor: pointer;
 }
 .bangazonButton:hover{
   color: white;

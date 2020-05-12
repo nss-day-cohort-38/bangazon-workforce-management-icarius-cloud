@@ -19,7 +19,16 @@
       <label for="purchase_date">Purchase Date: </label>
       <input id="purchase_date" type="date" name="purchase_date">
   </fieldset>
-  <input type="submit" value="Purchase Computer" />
+  <fieldset>
+    <label for="employee">Assign to Employee: </label>
+    <select id="employee" type="text" name="employee">
+      <option value=0 disabled selected>select</option>
+          {% for employee in employees %}
+              <option value={{ employee.id }}>{{ employee }} ({{employee.department_name}})</option>
+          {% endfor %}
+    </select>
+</fieldset>
+  <input class="bangazonButton" type="submit" value="Purchase Computer" />
 </form>
 
 {% endblock content %}
