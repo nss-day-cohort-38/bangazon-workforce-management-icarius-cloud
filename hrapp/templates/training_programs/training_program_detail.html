@@ -7,6 +7,10 @@
     <h2>End Date: {{training_program.end_date}}</h2>
     <h2>Capacity: {{training_program.capacity}}</h2>
     <a class='bangazonButton'>Edit</a>
-    <a class='bangazonButton'>Delete</a>
 
+    <form action="{% url 'hrapp:training_program_details' training_program.id %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="actual_method" value="DELETE">
+    <button class='bangazonButton'>Delete</button>
+    </form>
 {% endblock content %}
