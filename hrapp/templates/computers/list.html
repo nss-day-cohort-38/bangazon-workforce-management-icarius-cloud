@@ -1,19 +1,17 @@
+{% extends 'shared/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Bangazon</title>
-  </head>
-  <body>
-    <h1>Computers</h1>
 
-    <ol>
+{% block content %}
+    <h1 class="sectionHeader">Computers <a class='bangazonButton' href="{% url 'hrapp:computer_form' %}">Purchase Computer</a></h1>
+
+    <section class="listContainer">
     {% for computer in all_computers %}
-        <li>
-            <a href="{% url 'hrapp:computer' computer.id %}"> {{ computer.manufacturer }} {{ computer.make }}</a>
-        </li>
+        <div class="listItem">
+            <img class="listImage" src="{% static 'images/computer.png' %}">  
+            <p>{{ computer.manufacturer }} {{ computer.make }}</p>
+            <a class="bangazonButton" href="{% url 'hrapp:computer' computer.id %}">Details</a>
+        </div>
     {% endfor %}
-    </ol>
-  </body>
-</html>
+    </section>
+    
+{% endblock content %}

@@ -1,16 +1,11 @@
+{% extends 'shared/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Bangazon Computer</title>
-  </head>
-  <body>
+
+{% block content %}
     <h1>{{ computer.manufacturer }} {{ computer.make }}</h1>
 
     <h3>Purchased: {{ computer.purchase_date }}</h3>
     {% if computer.decommission_date %}
         <h3>Decommissioned on: {{ computer.decommission_date }}</h3>
     {% endif %}
-  </body>
-</html>
+{% endblock content %}
