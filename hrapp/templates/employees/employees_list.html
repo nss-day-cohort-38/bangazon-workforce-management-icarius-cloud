@@ -1,14 +1,25 @@
 {% extends 'shared/base.html' %}
-
+{% load static %}
 {% block content %}
-<h1>Employees</h1>
+<h1>Employees  <a class="bangazonButton" href="{% url 'hrapp:employee_form' %}">Add Employee</a></h1>
 
-<ol>
-{% for employee in employees %}
-    <li>
-        <p>{{ employee.first_name }} {{ employee.last_name }}</p>
-        Department: {{employee.name}}
-    </li>
-{% endfor %}
-</ol>
+<section class="listContainer">
+    {% for employee in employees %}
+        {% if employee.is_supervisor %}
+            <div class="listItem supervisor">
+            <img class="listImage" src="{% static 'images/employee.png' %}">
+            <p>Employee: {{ employee }} (Suprvisor)</p>
+            <p>Department: {{employee.department_name}}
+            {% comment %} <a class="bangazonButton" href="{% url 'hrapp:employee_details' employee %}">Details</a> {% endcomment %}
+        </div>
+        {% else %}
+            <div class="listItem">
+            <img class="listImage" src="{% static 'images/employee.png' %}">
+            <p>Employee: {{ employee }}</p>
+            <p>Department: {{employee.department_name}}
+            {% comment %} <a class="bangazonButton" href="{% url 'hrapp:employee_details' employee %}">Details</a> {% endcomment %}
+        </div>
+        {% endif %}
+    {% endfor %}
+</section>
 {% endblock content %}
