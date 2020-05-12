@@ -6,6 +6,15 @@
     <h2>Start Date: {{ training_program.start_date}}</h2>
     <h2>End Date: {{training_program.end_date}}</h2>
     <h2>Capacity: {{training_program.capacity}}</h2>
+    <h2>Employees: </h2>
+    <ul>
+        {% for employee in employees %}
+        <li>
+            {{employee.first_name}} {{employee.last_name}}
+        </li>
+        {% endfor %}     
+    </ul>
+
     <section>
         <form action="{% url 'hrapp:training_program_edit_form' training_program.id %}" method="GET">
                 {% csrf_token %}
