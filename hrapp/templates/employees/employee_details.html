@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+
     {% if employee.is_supervisor %}
         <div class="detailsItem supervisor">
             <img class='detailsImage' src="{% static 'images/employee.png' %}">
@@ -10,6 +11,7 @@
             <p>Hire Date:{{ employee.start_date }}</p>
             <form action="{% url 'hrapp:employee_edit_form' employee.id %}" method="GET">
             <button class="bangazonButton">Edit Employee</button>
+            <a class="bangazonButton" href="{% url 'hrapp:assign_employee_form' employee.id %}">Assign To Training Program</a>
         </div>
     {% else %}
         <div class="detailsItem">
@@ -20,6 +22,7 @@
             <form action="{% url 'hrapp:employee_edit_form' employee.id %}" method="GET">
             {% csrf_token %}
             <button class="bangazonButton">Edit Employee</button>
+            <a class="bangazonButton" href="{% url 'hrapp:assign_employee_form' employee.id %}">Assign To Training Program</a>
         </div>
     {% endif %}
         

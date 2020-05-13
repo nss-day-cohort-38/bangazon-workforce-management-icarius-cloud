@@ -1,0 +1,15 @@
+{% extends 'shared/base.html' %}
+{%load static%}
+{% block content %}
+    <h1>Choose from eligible programs</h1>
+
+    <select>
+    <option disabled selected>Select</option>
+    {%for program in programs%}
+       
+       <option value={{program.id}}>{{program.title}}</option>
+      
+    {%endfor%}
+     </select>
+     <input class="bangazonButton" type="submit"></input>
+{%endblock%}
