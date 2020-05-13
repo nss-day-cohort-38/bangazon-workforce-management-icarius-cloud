@@ -36,8 +36,10 @@ def training_program_list(request):
                 training_program.capacity = row["capacity"]
                 if(datetime.strptime(training_program.start_date, "%Y-%m-%d") > datetime.now()):
                     future_training_programs.append(training_program)
+                    
                 else: 
                     past_training_programs.append(training_program)
+                   
                
 
         template = 'training_programs/training_program_list.html'
