@@ -9,6 +9,12 @@
     <h3>Purchased: {{ computer.purchase_date }}</h3>
     {% if computer.decommission_date %}
         <h3>Decommissioned on: {{ computer.decommission_date }}</h3>
+    {% else %}
+        <form action="{% url 'hrapp:computer' computer.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="actual_method" value="DELETE">
+            <button>Decommission</button>
+        </form>
     {% endif %}
 </div>
 {% endblock content %}
