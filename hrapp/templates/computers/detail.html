@@ -13,7 +13,7 @@
         <form action="{% url 'hrapp:computer' computer.id %}" method="POST">
             {% csrf_token %}
             <input type="hidden" name="actual_method" value="DELETE">
-            <button>Decommission</button>
+            <button onclick="return confirm('Are you sure?');">Decommission</button>
         </form>
     {% endif %}
 </div>
