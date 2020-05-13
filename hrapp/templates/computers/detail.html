@@ -9,6 +9,11 @@
     <h3>Purchased: {{ computer.purchase_date }}</h3>
     {% if assigned_employee %}
         <h3>Assigned to: {{ assigned_employee }} ({{assigned_employee.department_name}})</h3>
+        <form action="{% url 'hrapp:comp_details' computer.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="unassign" value="DELETE">
+            <button class='bangazonButton'>Delete</button>
+            </form>
     {% endif %}
     {% if computer.decommission_date %}
         <h3>Decommissioned on: {{ computer.decommission_date }}</h3>

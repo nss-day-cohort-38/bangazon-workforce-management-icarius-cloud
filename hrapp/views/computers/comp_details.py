@@ -65,3 +65,4 @@ def computer_details(request, computer_id):
         }
 
         return render(request, template, context)
+    
