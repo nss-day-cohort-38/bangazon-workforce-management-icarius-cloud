@@ -25,8 +25,13 @@
       </fieldset>
       <fieldset>
           <label for="department">Department: </label>
+          {% if employee %}
           <select id="department" type="text" name="department_id" value={{employee.department_id}}>
+          <option value="" disabled selected>{{employee.department_name}}</option>
+          {% else %}
+          <select id="department" type="text" name="department_id">
             <option value="" disabled selected>select</option>
+          {% endif %}
                 {% for department in all_departments %}
                     <option value="{{ department.id }}">{{ department.name }}</option>
                 {% endfor %}
@@ -34,10 +39,22 @@
       </fieldset>
       <fieldset>
           <label for="is_supervisor">Is Supervisor?: </label>
+          {% if employee.is_supervisor %}
           <select id="is_supervisor" type="text" name="is_supervisor" value={{employee.is_supervisor}}>
+          {% comment %} <option value="" disabled selected>{{employee.is_supervisor}}</option> {% endcomment %}
+          <option selected value=1>Yes</option>
+          <option value=0>No</option>
+          {%elif employee and not employee.is_supervisor%}
+          <select id="is_supervisor" type="text" name="is_supervisor" value={{employee.is_supervisor}}>
+          {% comment %} <option value="" disabled selected>{{employee.is_supervisor}}</option> {% endcomment %}
+          <option value=1>Yes</option>
+          <option selected value=0>No</option>
+          {% else %}
+          <select id="is_supervisor" type="text" name="is_supervisor">
             <option value="" disabled selected>select</option>
-            <option value=TRUE>Yes</option>
-            <option value=FALSE>No</option>
+            <option value=1>Yes</option>
+            <option value=0>No</option>
+          {% endif %}
           </select>
       </fieldset>
 
