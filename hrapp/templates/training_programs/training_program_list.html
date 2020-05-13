@@ -2,9 +2,15 @@
 {% load static %}
 
 {% block content %}
-<h1 class="sectionHeader">Training Programs <a class='bangazonButton' href="{%url 'hrapp:training_program_form' %}">Create New Training Program</a></h1>
 
-<section class="listContainer">
+<h1 class="sectionHeader">
+Training Programs
+ <a class='bangazonButton' href="{%url 'hrapp:training_program_form' %}">Create New Training Program</a>
+ </h1>
+ {%if somelogic: %}
+ {% include "training_programs/past_training_program_list.html" %}
+ {%else: %}
+ <section class="listContainer">
 {% for program in future_training_programs %}
         <div class="listItem">
              <img class="listImage" src="{% static 'images/training.png' %}">
@@ -13,4 +19,7 @@
         </div>
 {% endfor %}
 </section>
+ {%endif%}
+
+<a class='bangazonButton' href="{%url 'hrapp:training_program_list' %}">View Past Training programs</a>
 {% endblock content %}
