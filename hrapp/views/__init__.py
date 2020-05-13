@@ -13,4 +13,5 @@ from .computers.comp_details import computer_details
 from .computers.comp_form import computer_form
 from .home import home
 from .auth.logout import logout_user
+from .employees.employee_form import employee_form, employee_edit_form
 
