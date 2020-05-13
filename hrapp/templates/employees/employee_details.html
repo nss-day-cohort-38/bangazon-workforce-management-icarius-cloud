@@ -16,7 +16,7 @@
             <h1>{{ employee }}</h1>
             <p>Department: {{ employee.department_name }}</p>
             <p>Hire Date: {{ employee.start_date }}</p>
-            <form action="{% url 'hrapp:employee_edit_form' %}" method="GET">
+            {% comment %} <form action="{% url 'hrapp:employee_edit_form' employee.id %}" method="GET"> {% endcomment %}
             {% csrf_token %}
             <button class="bangazonButton">Edit Employee</button>
         </div>

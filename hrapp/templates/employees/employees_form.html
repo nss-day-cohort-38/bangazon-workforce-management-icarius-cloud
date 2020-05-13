@@ -4,8 +4,12 @@
     <h1>Add Employee</h1>
 
 
-    <form action="{% url 'hrapp:employee_list' %}" method="post">
-      {% csrf_token %}
+     {% if employee.id is not None %}
+        <form action="{% url 'hrapp:employee_details' employee.id %}" method="post">
+    {% else %}
+        <form action="{% url 'hrapp:employee_list' %}" method="post">
+    {% endif %}
+        {% csrf_token %}
       <fieldset>
           <label for="first_name">First Name: </label>
           <input id="first_name" type="text" name="first_name">
@@ -36,6 +40,11 @@
           </select>
       </fieldset>
 
-      <input type="submit" value="Add Employee" />
+      {% if employee.id is not None %}
+            <input type="hidden" name="actual_method" value="PUT">
+            <input class="bangazonButton" type="submit" value="Update" />
+        {% else %}
+            <input class="bangazonButton" type="submit" value="Create" />
+        {% endif %}
     </form>
 {% endblock content %}

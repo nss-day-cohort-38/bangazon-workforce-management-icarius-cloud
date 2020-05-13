@@ -44,3 +44,42 @@ def employee_details(request, employee_id):
         }
 
         return render(request, template, context)
+    
+    elif request.method == 'POST':
+            
+        form_data = request.POST
+
+        if (
+            "actual_method" in form_data
+            and form_data["actual_method"] == "PUT"
+        ):   
+            with sqlite3.connect(Connection.db_path) as conn:
+                    db_cursor = conn.cursor()
+                    db_cursor.execute("""
+                    UPDATE hrapp_employee
+                    SET first_name = ?,
+                        last_name = ?,
+                        start_date = ?,
+                        is_supervisor = ?,
+                        department_id = ?
+                    WHERE id = ?
+                    """,
+                    (
+                        form_data['first_name'], form_data['last_name'],  form_data['start_date'],
+                        form_data['is_supervisor'], form_data['department_id'],
+                    ))
+            return redirect(reverse('hrapp:employee_list'))
+            
+        # if(
+        #     "actual_method" in form_data
+        #     and form_data["actual_method"] == "DELETE"
+        # ):
+        #     with sqlite3.connect(Connection.db_path) as conn:
+        #         db_cursor = conn.cursor()
+
+        #         db_cursor.execute("""
+        #         DELETE FROM hrapp_employee
+        #         WHERE id = ?
+        #         """, (employee_id,))
+
+        #     return redirect(reverse('hrapp:employee_list'))
