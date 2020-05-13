@@ -1,5 +1,6 @@
 {% load static %}
 
+<div id="past" class="hidden listContainer">
 {% for program in past_training_programs %}
         <div class="listItem">
              <img class="listImage" src="{% static 'images/training.png' %}">
@@ -7,6 +8,7 @@
              <a class='bangazonButton' href="{% url 'hrapp:training_program_details' program.id %}">Details</a>
         </div>
 {% endfor %}
+</div>
 
 
 

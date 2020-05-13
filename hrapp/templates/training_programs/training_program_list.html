@@ -3,7 +3,6 @@
 
 {% block content %}
 
-
 <h1 class="sectionHeader">
 Training Programs
  <a class='bangazonButton' href="{%url 'hrapp:training_program_form' %}">Create New Training Program</a>
@@ -11,21 +10,44 @@ Training Programs
 
 <section>
 
+
+    <section class="listContainer">
    
+       {% include "training_programs/past_training_program_list.html" %}
+       
+        <div id="future" class="">
         {% for program in future_training_programs %}
-                <div class="listItem">
+  
+                <div  class="listItem">
                     <img class="listImage" src="{% static 'images/training.png' %}">
                     <p>{{program}}</p>
                     <a class='bangazonButton' href="{% url 'hrapp:training_program_details' program.id %}">Details</a>
                 </div>
+     
         {% endfor %}
-
+        </div>
+   
     </section>
 
- 
-    <button class='bangazonButton' id="past" onClick="() => {}">View Past Training programs</button>
+   
+    <button class='bangazonButton hidden' id="future_button" onClick="toggle_button()">View Future Training programs</button>
 
+    <button class='bangazonButton'  id="past_button" onClick="toggle_button()">View Past Training programs</button>
+   
     
 </section>
+
+{% block javascript %}
+    <script>
+
+    function toggle_button() {
+        document.getElementById("past").classList.toggle("hidden")
+        document.getElementById("future").classList.toggle("hidden")
+        document.getElementById("past_button").classList.toggle("hidden")
+        document.getElementById("future_button").classList.toggle("hidden")
+    }
+
+    </script>
+{% endblock %}
 
 {% endblock content %}
