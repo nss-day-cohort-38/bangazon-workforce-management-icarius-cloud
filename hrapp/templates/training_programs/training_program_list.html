@@ -2,15 +2,52 @@
 {% load static %}
 
 {% block content %}
-<h1 class="sectionHeader">Training Programs <a class='bangazonButton' href="{%url 'hrapp:training_program_form' %}">Create New Training Program</a></h1>
 
-<section class="listContainer">
-{% for program in future_training_programs %}
-        <div class="listItem">
-             <img class="listImage" src="{% static 'images/training.png' %}">
-             <p>{{program}}</p>
-             <a class='bangazonButton' href="{% url 'hrapp:training_program_details' program.id %}">Details</a>
-        </div>
-{% endfor %}
+<h1 class="sectionHeader">
+Training Programs
+ <a class='bangazonButton' href="{%url 'hrapp:training_program_form' %}">Create New Training Program</a>
+ </h1>
+
+<section>
+
+
+    
+   
+       {% include "training_programs/past_training_program_list.html" %}
+       
+        <section id="future" class="listContainer">
+        {% for program in future_training_programs %}
+  
+                <div  class="listItem">
+                    <img class="listImage" src="{% static 'images/training.png' %}">
+                    <p>{{program}}</p>
+                    <a class='bangazonButton' href="{% url 'hrapp:training_program_details' program.id %}">Details</a>
+                </div>
+     
+        {% endfor %}
+        </section>
+   
+
+
+   
+    <button class='bangazonButton hidden' id="future_button" onClick="toggle_button()">View Future Training programs</button>
+
+    <button class='bangazonButton'  id="past_button" onClick="toggle_button()">View Past Training programs</button>
+   
+    
 </section>
+
+{% block javascript %}
+    <script>
+
+    function toggle_button() {
+        document.getElementById("past").classList.toggle("hidden")
+        document.getElementById("future").classList.toggle("hidden")
+        document.getElementById("past_button").classList.toggle("hidden")
+        document.getElementById("future_button").classList.toggle("hidden")
+    }
+
+    </script>
+{% endblock %}
+
 {% endblock content %}

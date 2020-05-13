@@ -47,3 +47,12 @@ form .bangazonButton {
   width: 200px !important;
   margin-right: 5px;
 }
+
+.hidden {
+  display: none !important;
+}
+
+section button {
+  display: flex;
+  justify-content: center;
+}
