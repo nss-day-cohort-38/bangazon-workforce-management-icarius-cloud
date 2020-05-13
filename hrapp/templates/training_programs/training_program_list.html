@@ -11,16 +11,7 @@ Training Programs
 
 <section>
 
-    <section class="listContainer">
-    {% if check == false %}
-        {%for program in past_training_programs %}
-            <div class="listItem">
-                    <img class="listImage" src="{% static 'images/training.png' %}">
-                    <p>{{program}}</p>
-                    <a class='bangazonButton' href="{% url 'hrapp:training_program_details' program.id %}">Details</a>
-                </div>
-        {% endfor %}
-    {% elif check == true %} 
+   
         {% for program in future_training_programs %}
                 <div class="listItem">
                     <img class="listImage" src="{% static 'images/training.png' %}">
@@ -28,27 +19,13 @@ Training Programs
                     <a class='bangazonButton' href="{% url 'hrapp:training_program_details' program.id %}">Details</a>
                 </div>
         {% endfor %}
-    {% endif %}
+
     </section>
 
-    {% if check == true %}
-    <button class='bangazonButton' id="past" onClick="check()">View Future Training programs</button>
-    {% elif check == false %} 
-    <button class='bangazonButton' id="past" onClick="uncheck()">View Past Training programs</button>
-    {%endif%}
+ 
+    <button class='bangazonButton' id="past" onClick="() => {}">View Past Training programs</button>
 
+    
 </section>
-
-{% block javascript %}
-<script>
-function check() {
-    check = true
-}
-function uncheck() {
-    check = false
-}
-</script>
-{% endblock %}
-
 
 {% endblock content %}
