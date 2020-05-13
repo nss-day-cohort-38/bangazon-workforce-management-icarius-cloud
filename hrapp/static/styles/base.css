@@ -34,10 +34,16 @@ body {
   transition: 0.5s ease;
   text-align: center;
   font-size: small;
+  cursor: pointer;
 }
 .bangazonButton:hover{
   color: white;
   background-color: #be751a;
   border-color: #be751a #b26d18 #9a5f15;
   transition: 0.5s ease;
+}
+
+form .bangazonButton {
+  width: 200px !important;
+  margin-right: 5px;
 }
