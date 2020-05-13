@@ -2,6 +2,26 @@
 {% load static %}
 
 {% block content %}
-    <h1>{{ department.name }}</h1>
-    <h2>Budget: ${{ department.budget }}</h2>
+    <section class="detailsItem">
+        <img class="detailsImage" src="{% static 'images/department.png' %}">
+        <h1>{{ department.name }}</h1>
+        <h3>Budget: ${{ department.budget }}</h2>
+        <div>
+            {%for employee in department.employees %}
+                {%if employee.is_supervisor %}
+                    <h4>Supervisor: </h6>
+                    <p>{{employee}}</p>
+                {% endif %}
+            {% endfor %}
+            <h4>Employees:</h6>
+            <p>
+            {%for employee in department.employees %}
+               
+                {%if not employee.is_supervisor %}
+                   - {{employee}} -
+                {% endif %}
+            {% endfor %}
+            </p>
+        </div>
+    </section>
 {% endblock content %}
