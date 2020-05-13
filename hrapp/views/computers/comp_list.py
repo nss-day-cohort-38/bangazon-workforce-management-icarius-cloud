@@ -11,26 +11,27 @@ def computer_list(request):
             db_cursor = conn.cursor()
 
             db_cursor.execute("""
-            select
+            SELECT
                 c.id,
                 c.make,
                 c.manufacturer,
                 c.purchase_date,
                 c.decommission_date
-            from hrapp_computer c
+            FROM hrapp_computer AS c
+            JOIN hrapp_employeecomputer AS ec 
             """)
 
             all_computers = []
             dataset = db_cursor.fetchall()
 
-            for row in dataset:
+            for i, row in enumerate(dataset):
                 computer = Computer()
                 computer.id = row['id']
                 computer.make = row['make']
                 computer.manufacturer = row['manufacturer']
                 computer.purchase_date = row['purchase_date']
                 computer.decommission_date = row['decommission_date']
-
+                print(f"This is the computer {i}", computer.decommission_date)
                 all_computers.append(computer)
 
         template = 'computers/list.html'
