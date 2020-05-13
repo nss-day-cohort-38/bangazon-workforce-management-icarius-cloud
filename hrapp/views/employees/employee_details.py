@@ -12,6 +12,7 @@ def get_employee(employee_id):
 
         db_cursor.execute("""
         SELECT
+            e.id,
             e.first_name,
             e.last_name,
             e.start_date,
@@ -26,11 +27,13 @@ def get_employee(employee_id):
         response = db_cursor.fetchone()
         print(response)
         employee = Employee()
-        employee.first_name = response[0]
-        employee.last_name = response[1]
-        employee.start_date = response[2]
-        employee.is_supervisor = response[3]
-        employee.department_name = response[5]
+        employee.id = response[0]
+        employee.first_name = response[1]
+        employee.last_name = response[2]
+        employee.start_date = response[3]
+        employee.is_supervisor = response[4]
+        employee.department_id = response[5]
+        employee.department_name = response[6]
 
         return employee
 
@@ -66,7 +69,7 @@ def employee_details(request, employee_id):
                     """,
                     (
                         form_data['first_name'], form_data['last_name'],  form_data['start_date'],
-                        form_data['is_supervisor'], form_data['department_id'],
+                        form_data['is_supervisor'], form_data['department_id'], employee_id,
                     ))
             return redirect(reverse('hrapp:employee_list'))
             
