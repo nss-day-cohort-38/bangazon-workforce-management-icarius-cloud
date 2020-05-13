@@ -26,15 +26,18 @@
       <fieldset>
           <label for="department">Department: </label>
           {% if employee %}
-          <select id="department" type="text" name="department_id" value={{employee.department_id}}>
-          <option value="" disabled selected>{{employee.department_name}}</option>
+            <select id="department_id" type="text" name="department_id" value={{employee.department_id}}>
           {% else %}
-          <select id="department" type="text" name="department_id">
-            <option value="" disabled selected>select</option>
+            <select id="department_id" type="text" name="department_id" required>
+            <option value={{employee.department_id}} disabled selected>select</option>
           {% endif %}
-                {% for department in all_departments %}
+               {% for department in all_departments %}
+                    {% if employee and employee.department_id == department.id%}
+                    <option value="{{ department.id }}" selected>{{department.name}}</option>
+                    {% else %}
                     <option value="{{ department.id }}">{{ department.name }}</option>
-                {% endfor %}
+                    {% endif %}
+               {% endfor %}
           </select>
       </fieldset>
       <fieldset>
@@ -45,12 +48,12 @@
           <option selected value=1>Yes</option>
           <option value=0>No</option>
           {%elif employee and not employee.is_supervisor%}
-          <select id="is_supervisor" type="text" name="is_supervisor" value={{employee.is_supervisor}}>
+          <select id="is_supervisor" type="text" name="is_supervisor" value={{employee.is_supervisor}} required>
           {% comment %} <option value="" disabled selected>{{employee.is_supervisor}}</option> {% endcomment %}
           <option value=1>Yes</option>
           <option selected value=0>No</option>
           {% else %}
-          <select id="is_supervisor" type="text" name="is_supervisor">
+          <select id="is_supervisor" type="text" name="is_supervisor" required>
             <option value="" disabled selected>select</option>
             <option value=1>Yes</option>
             <option value=0>No</option>
