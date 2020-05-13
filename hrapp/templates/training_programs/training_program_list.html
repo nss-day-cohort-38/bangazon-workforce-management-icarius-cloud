@@ -11,11 +11,11 @@ Training Programs
 <section>
 
 
-    <section class="listContainer">
+    
    
        {% include "training_programs/past_training_program_list.html" %}
        
-        <div id="future" class="">
+        <section id="future" class="listContainer">
         {% for program in future_training_programs %}
   
                 <div  class="listItem">
@@ -25,9 +25,9 @@ Training Programs
                 </div>
      
         {% endfor %}
-        </div>
+        </section>
    
-    </section>
+
 
    
     <button class='bangazonButton hidden' id="future_button" onClick="toggle_button()">View Future Training programs</button>
