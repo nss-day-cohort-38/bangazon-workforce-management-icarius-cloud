@@ -2,27 +2,46 @@ import sqlite3
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from hrapp.models import Department
+from hrapp.models import Department, Employee
 from ..connection import Connection
 
 
 def get_department(department_name):
     with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
         SELECT
             d.name,
-            d.budget
-        FROM hrapp_department AS d
+            d.budget,
+            e.first_name,
+            e.last_name,
+            e.is_supervisor
+        FROM hrapp_employee AS e
+        LEFT JOIN hrapp_department AS d ON e.department_id = d.id
         WHERE d.name = ?
         """, (department_name,))
 
-        response = db_cursor.fetchone()
-        department = Department()
-        department.name = response[0]
-        department.budget = response[1]
-
+        response = db_cursor.fetchall()
+        for row in response:
+            if row == response[0]:
+                department = Department()
+                department.employees = []
+                department.name = row['name']
+                department.budget = row['budget']
+                employee = Employee()
+                employee.first_name = row['first_name']
+                employee.last_name = row['last_name']
+                employee.is_supervisor = row['is_supervisor']
+                department.employees.append(employee)
+            else:
+                employee = Employee()
+                employee.first_name = row['first_name']
+                employee.last_name = row['last_name']
+                employee.is_supervisor = row['is_supervisor']
+                department.employees.append(employee)
+        department.number = len(department.employees)
         return department
 
 # @login_required
