@@ -15,23 +15,24 @@ def get_employees():
             e.first_name,
             e.last_name,
             e.department_id,
-            d.name
+            d.name,
+            ec.assign_date
         FROM hrapp_employee AS e
-        JOIN hrapp_department AS d
-        ON e.department_id = d.id
+        JOIN hrapp_department AS d ON e.department_id = d.id
+        LEFT JOIN hrapp_employeecomputer AS ec ON ec.employee_id = e.id
+        WHERE ec.employee_id IS NULL
         """)
 
         all_employees = []
         dataset = db_cursor.fetchall()
+        print(len(dataset))
         for row in dataset:
             employee = Employee()
             employee.id = row['id']
             employee.first_name = row['first_name']
             employee.last_name = row['last_name']
             employee.department_name = row['name']
-
             all_employees.append(employee)
-        print(all_employees)
         return all_employees
 
 
@@ -59,15 +60,15 @@ def computer_form(request):
             """,
             (form_data['manufacturer'], form_data['make'], form_data['purchase_date']))
 
-            if hasattr(form_data,'employee'):
-
+            try:
                 db_cursor.execute("""
                 INSERT INTO hrapp_employeecomputer
                 (assign_date, unassigned_date, computer_id, employee_id)
                 VALUES (?, ?, ?, ?)
                 """,
                 (form_data['purchase_date'], "N/A", db_cursor.lastrowid, form_data['employee']))
-
+            except:
+                print()
             
 
         return redirect(reverse('hrapp:computers'))

@@ -23,7 +23,7 @@ def get_assigned_employee(computer_id):
         """, (computer_id,))
 
         response = db_cursor.fetchone()
-        
+        print(response)
         if response:
             employee = Employee()
             employee.first_name = response[0]
