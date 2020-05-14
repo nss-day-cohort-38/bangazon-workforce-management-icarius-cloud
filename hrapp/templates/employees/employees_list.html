@@ -73,14 +73,14 @@
             <div class="listItem supervisor">
                 <img class="listImage" src="{% static 'images/employee.png' %}">
                 <p>{{ employee }} (Supervisor)</p>
-                <p>{{employee.department_name}}</p>
+                <p class="deptName">{{employee.department_name}}</p>
                  
             </div>
         {% else %}
             <div class="listItem">
                 <img class="listImage" src="{% static 'images/employee.png' %}">
                 <p>{{ employee }}</p>
-                <p>Department: {{employee.department_name}}</p>
+                <p class="deptName">{{employee.department_name}}</p>
                 
             </div>
         {% endif %}
