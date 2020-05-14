@@ -4,7 +4,8 @@
     padding: 10px;
     position: fixed;
     top: 0;
-    background-color: #232f3e;
+    background-color: var(--bangazonBlack);
+    z-index: 1;
 }
 
 #logo {
@@ -33,7 +34,7 @@
 }
 
 .navLink:hover {
-    color: #fea902;
+    color: var(--bangazonOrange);
     text-decoration: underline;
     transition: 0.5s ease;
 }

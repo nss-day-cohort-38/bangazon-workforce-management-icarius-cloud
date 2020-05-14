@@ -2,16 +2,49 @@
 {% load static %}
 
 {% block content %}
-<h1 class="sectionHeader">Departments <a class='bangazonButton' href="{% url 'hrapp:department_form' %}">Add Department</a></h1>
+<h1 class="sectionHeader">Departments <button class='bangazonButton' onclick="toggleButton()" >Add Department</button></h1>
 
 <section class="listContainer">
-{% for department in departments %}
-    <div class="listItem">
-        <img class="listImage" src="{% static 'images/department.png' %}">
-        <p>{{ department.name }} </p>
-        <a class="bangazonButton" href="{% url 'hrapp:department_details' department.name %}">Details</a>
-    </div>
-{% endfor %}
+    {% for department in departments %}
+        <div class="listItem details" onclick='toggleIFrame("{{department.id}}")'>
+           <img class="listImage" src="{% static 'images/department.png' %}">
+           <p>{{ department.name }} </p>
+           <div></div>
+          <!-- <<a class="bangazonButton" href="{% url 'hrapp:department_details' department.name %}">Details</a>> -->
+        </div>
+        <iframe name="{{department.name}}" id="{{department.id}}" class="detailsFrame hidden" src="{% url 'hrapp:department_details' department.name %}"></iframe>
+    {% endfor %}
 </section>
+<div id="greyBackground" class="hidden">
+<section id="creationForm">
+    <h1>Add Department</h1>
 
+    <form action="{% url 'hrapp:department_form' %}" method="post">
+        {% csrf_token %}
+      <fieldset>
+          <label for="name">Name: </label>
+          <input id="name" type="text" name="name">
+      </fieldset>
+      <fieldset>
+          <label for="budget">Budget: </label>
+          <input id="budget" type="float" name="budget">
+      </fieldset>
+      <input class="bangazonButton" type="submit" value="Create Department" />
+    </form>
+    <div class="formExit" onclick="toggleButton()">X</div>
+</section>
+</div>
+{% block javascript %}
+    <script>
+        function toggleButton(){
+            document.getElementById('greyBackground').classList.toggle('hidden')
+        }
+
+        function toggleIFrame(id){
+            document.getElementById(id).classList.toggle('hidden')
+        }
+
+        
+    </script>
+{% endblock %}
 {% endblock content %}
