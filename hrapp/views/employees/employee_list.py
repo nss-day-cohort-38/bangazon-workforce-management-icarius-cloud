@@ -2,7 +2,7 @@ import sqlite3
 from django.shortcuts import render, redirect, reverse
 from hrapp.models import Employee, Department
 from ..connection import Connection
-
+from django.contrib.auth.decorators import login_required
 
 def employee_list(request):
     if request.method == 'GET':
