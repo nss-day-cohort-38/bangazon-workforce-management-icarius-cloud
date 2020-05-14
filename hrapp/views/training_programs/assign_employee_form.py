@@ -42,6 +42,8 @@ def get_training_programs():
 
 def assign_employee_form(request, employee_id):
     if request.method == 'GET':
+        employee = request.GET.get('employee')
+        
         programs = get_training_programs()
         with sqlite3.connect(Connection.db_path) as conn:
              
@@ -68,9 +70,27 @@ def assign_employee_form(request, employee_id):
         
         dataset = db_cursor.fetchall()
         context = {
-            'programs': programs  
+            'programs': programs,
+            'employee': employee_id
         }
 
         template = 'training_programs/assign_employee_form.html'
        
         return render(request, template, context)
+
+    elif request.method == 'POST':
+            form_data = request.POST
+        
+            with sqlite3.connect(Connection.db_path) as conn:
+                db_cursor = conn.cursor()
+
+                db_cursor.execute("""
+                INSERT INTO hrapp_employeetrainingprogram
+                (
+                    employee_id, training_program_id
+                )
+                VALUES (?, ?)
+                """,
+                (form_data['hidden_employee'], form_data['training_program'],))
+
+            return redirect(reverse('employee_details/', employee_id))
