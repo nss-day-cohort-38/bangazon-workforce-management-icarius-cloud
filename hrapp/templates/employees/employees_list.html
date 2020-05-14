@@ -9,7 +9,7 @@
             <div class="listItem supervisor">
                 <img class="listImage" src="{% static 'images/employee.png' %}">
                 <p>{{ employee }} (Supervisor)</p>
-                <p>{{employee.department_name}}</p>
+                <p>Department: {{employee.department_name}}</p>
                 <a class="bangazonButton" href="{% url 'hrapp:employee_details' employee.id %}">Details</a> 
             </div>
         {% else %}

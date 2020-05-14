@@ -24,7 +24,6 @@
   <fieldset>
     <label for="employee">Assign to Employee: </label>
     <select id="employee" type="text" name="employee">
-      <option value="" disabled selected>select</option>
           {% for employee in employees %}
               <option value={{ employee.id }}>{{ employee }} ({{employee.department_name}})</option>
           {% endfor %}

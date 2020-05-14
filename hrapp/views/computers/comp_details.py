@@ -68,14 +68,18 @@ def decommission(computer_id):
                               now.strftime("%Y-%m-%d"), computer_id,
                           ))
 
-def remove_emp_connection(computer_id):
+def unassign_comp(computer_id):
+    now = datetime.now()
+
     with sqlite3.connect(Connection.db_path) as conn:
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
-            DELETE FROM hrapp_employeecomputer
-            WHERE id = ?
-            """, (computer_id,))
+            UPDATE hrapp_employeecomputer
+            SET unassigned_date = ?,
+                employee_id = ?
+            WHERE computer_id = ?
+            """, (now.strftime("%Y-%m-%d"), 0, computer_id,))
 
 def computer_details(request, computer_id):
     if request.method == 'GET':
@@ -99,7 +103,10 @@ def computer_details(request, computer_id):
             and form_data["actual_method"] == "DELETE"
         ):
             decommission(computer_id)
-            remove_emp_connection(computer_id)
+            unassign_comp(computer_id)
+        elif ("actual_method" in form_data
+            and form_data["actual_method"] == "UNASSIGN"):
+            unassign_comp(computer_id)
 
         return redirect(reverse('hrapp:computers'))
 

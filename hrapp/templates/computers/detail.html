@@ -13,6 +13,13 @@
     {% if computer.decommission_date %}
         <h3>Decommissioned on: {{ computer.decommission_date }}</h3>
     {% else %}
+        {% if assigned_employee %}
+        <form action="{% url 'hrapp:computer' computer.id %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="actual_method" value="UNASSIGN">
+            <button>Unassign</button>
+        </form>
+        {% endif %}
         <form action="{% url 'hrapp:computer' computer.id %}" method="POST">
             {% csrf_token %}
             <input type="hidden" name="actual_method" value="DELETE">
