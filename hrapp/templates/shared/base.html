@@ -24,6 +24,12 @@
             <a class="navLink" href="{% url 'hrapp:department_list' %}">Departments</a>
             <a class="navLink" href="{% url 'hrapp:training_program_list' %}">Training</a>
             <a class="navLink" href="{% url 'hrapp:computers' %}">Computers</a>
+            {% if user.is_authenticated %}
+                <a class="navLink" href="{% url 'hrapp:logout' %}">Log Out</a>
+            {% else %}
+                <a class="navLink" href="{% url 'hrapp:login' %}">Log In</a>
+            {% endif %}    
+            
         </div>
     </nav>
 
