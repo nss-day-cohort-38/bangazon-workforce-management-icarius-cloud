@@ -1,5 +1,8 @@
 {% extends 'shared/base.html' %}
 {% block content %}
+
+<div id="greyBackground">
+<section id="creationForm">
     <h1>Add Training Program</h1>
 
     {% if training_program.id is not None %}
@@ -32,4 +35,6 @@
             <input class="bangazonButton" type="submit" value="Create" />
         {% endif %}
     </form>
+</section>
+</div>
 {%endblock%}

@@ -2,48 +2,140 @@
 {% load static %}
 {% block content %}
 {% if user.is_authenticated %}
-<h1>Employees  <a class="bangazonButton" href="{% url 'hrapp:employee_form' %}">Add Employee</a></h1>
+<h1 class="sectionHeader">Employees  <button class="bangazonButton" onclick="toggleButton()">Add Employee</button></h1>
 
 <section class="listContainer">
     {% for employee in employees %}
         {% if employee.is_supervisor %}
             <div class="listItem supervisor">
-            <img class="listImage" src="{% static 'images/employee.png' %}">
-            <p>{{ employee }} (Supervisor)</p>
-            <p>Department: {{employee.department_name}}</p>
-            <a class="bangazonButton" href="{% url 'hrapp:employee_details' employee.id %}">Details</a> 
-        </div>
+                <img class="listImage" src="{% static 'images/employee.png' %}">
+                <p>{{ employee }} (Supervisor)</p>
+                <p>{{employee.department_name}}</p>
+                <a class="bangazonButton" href="{% url 'hrapp:employee_details' employee.id %}">Details</a> 
+            </div>
         {% else %}
             <div class="listItem">
-            <img class="listImage" src="{% static 'images/employee.png' %}">
-            <p>{{ employee }}</p>
-            <p>Department: {{employee.department_name}}</p>
-            <a class="bangazonButton" href="{% url 'hrapp:employee_details' employee.id %}">Details</a>
-        </div>
+                <img class="listImage" src="{% static 'images/employee.png' %}">
+                <p>{{ employee }}</p>
+                <p>Department: {{employee.department_name}}</p>
+                <a class="bangazonButton" href="{% url 'hrapp:employee_details' employee.id %}">Details</a>
+            </div>
         {% endif %}
     {% endfor %}
+
+    <div id="greyBackground" class="hidden">
+        <section id="creationForm">
+            <h1>Add Employee</h1>
+        <form action="{% url 'hrapp:employee_list' %}" method="post">
+
+            {% csrf_token %}
+            <fieldset>
+                <label for="first_name">First Name: </label>
+                <input id="first_name" type="text" name="first_name" >
+            </fieldset>
+            <fieldset>
+                <label for="last_name">Last Name: </label>
+                <input id="last_name" type="text" name="last_name">
+            </fieldset>
+            <fieldset>
+                <label for="start_date">Start Date: </label>
+                <input id="start_date" type="date" name="start_date" >
+            </fieldset>
+            <fieldset>
+                <label for="department">Department: </label>
+                  <select id="department_id" type="text" name="department_id" required>
+                  <option value={{employee.department_id}} disabled selected>select</option>
+                     {% for department in all_departments %}   
+                          <option value="{{ department.id }}">{{ department.name }}</option>
+                     {% endfor %}
+                </select>
+            </fieldset>
+            <fieldset>
+                <label for="is_supervisor">Is Supervisor?: </label>
+                <select id="is_supervisor" type="text" name="is_supervisor" required>
+                  <option value="" disabled selected>select</option>
+                  <option value=1>Yes</option>
+                  <option value=0>No</option>
+                </select>
+            </fieldset>
+        
+            
+                    <input class="bangazonButton" type="submit" value="Create" />
+            </form>
+            <div class="formExit" onclick="toggleButton()">X</div>
+        </section>
 </section>
 
 {% else %}
-
-<h1>Employees</h1>
+<h1 class="sectionHeader">Employees</h1>
 
 <section class="listContainer">
     {% for employee in employees %}
         {% if employee.is_supervisor %}
             <div class="listItem supervisor">
-            <img class="listImage" src="{% static 'images/employee.png' %}">
-            <p>{{ employee }} (Supervisor)</p>
-            <p>Department: {{employee.department_name}}</p>
-        </div>
+                <img class="listImage" src="{% static 'images/employee.png' %}">
+                <p>{{ employee }} (Supervisor)</p>
+                <p>{{employee.department_name}}</p>
+                 
+            </div>
         {% else %}
             <div class="listItem">
-            <img class="listImage" src="{% static 'images/employee.png' %}">
-            <p>{{ employee }}</p>
-            <p>Department: {{employee.department_name}}</p>
-        </div>
+                <img class="listImage" src="{% static 'images/employee.png' %}">
+                <p>{{ employee }}</p>
+                <p>Department: {{employee.department_name}}</p>
+                
+            </div>
         {% endif %}
     {% endfor %}
+
+    <div id="greyBackground" class="hidden">
+        <section id="creationForm">
+            <h1>Add Employee</h1>
+        <form action="{% url 'hrapp:employee_list' %}" method="post">
+
+            {% csrf_token %}
+            <fieldset>
+                <label for="first_name">First Name: </label>
+                <input id="first_name" type="text" name="first_name" >
+            </fieldset>
+            <fieldset>
+                <label for="last_name">Last Name: </label>
+                <input id="last_name" type="text" name="last_name">
+            </fieldset>
+            <fieldset>
+                <label for="start_date">Start Date: </label>
+                <input id="start_date" type="date" name="start_date" >
+            </fieldset>
+            <fieldset>
+                <label for="department">Department: </label>
+                  <select id="department_id" type="text" name="department_id" required>
+                  <option value={{employee.department_id}} disabled selected>select</option>
+                     {% for department in all_departments %}   
+                          <option value="{{ department.id }}">{{ department.name }}</option>
+                     {% endfor %}
+                </select>
+            </fieldset>
+            <fieldset>
+                <label for="is_supervisor">Is Supervisor?: </label>
+                <select id="is_supervisor" type="text" name="is_supervisor" required>
+                  <option value="" disabled selected>select</option>
+                  <option value=1>Yes</option>
+                  <option value=0>No</option>
+                </select>
+            </fieldset>
+        
+            
+                    <input class="bangazonButton" type="submit" value="Create" />
+            </form>
+            <div class="formExit" onclick="toggleButton()">X</div>
+        </section>
 </section>
 {% endif %}
+{% block javascript %}
+    <script>
+        function toggleButton(){
+            document.getElementById('greyBackground').classList.toggle('hidden')
+        }
+    </script>
+{% endblock %}
 {% endblock content %}

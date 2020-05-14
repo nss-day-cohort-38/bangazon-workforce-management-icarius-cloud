@@ -5,13 +5,10 @@
 {% if user.is_authenticated %}
 <h1 class="sectionHeader">
 Training Programs
- <a class='bangazonButton' href="{%url 'hrapp:training_program_form' %}">Create New Training Program</a>
+ <button class='bangazonButton' onclick="toggleButton()">Create New Training Program</button>
  </h1>
 
 <section>
-
-
-    
    
        {% include "training_programs/past_training_program_list.html" %}
        
@@ -27,21 +24,17 @@ Training Programs
         {% endfor %}
         </section>
    
+    <button class='bangazonButton training hidden' id="future_button" onClick="toggle_button()">View Future Training programs</button>
 
-
-   
-    <button class='bangazonButton hidden' id="future_button" onClick="toggle_button()">View Future Training programs</button>
-
-    <button class='bangazonButton'  id="past_button" onClick="toggle_button()">View Past Training programs</button>
-   
+    <button class='bangazonButton training'  id="past_button" onClick="toggle_button()">View Past Training programs</button> 
     
 </section>
-{% else %}
-    <h1 class="sectionHeader">
-    Training Programs
-    </h1>
 
-    <section>
+{% else %}
+
+<h1 class="sectionHeader">Training Programs</h1>
+
+<section>
        {% include "training_programs/past_training_program_list.html" %}
        
         <section id="future" class="listContainer">
@@ -53,16 +46,50 @@ Training Programs
                 </div>
      
         {% endfor %}
-    </section>
+        </section>
    
-    <button class='bangazonButton hidden' id="future_button" onClick="toggle_button()">View Future Training programs</button>
+    <button class='bangazonButton training hidden' id="future_button" onClick="toggle_button()">View Future Training programs</button>
 
-    <button class='bangazonButton'  id="past_button" onClick="toggle_button()">View Past Training programs</button>
-     
+    <button class='bangazonButton training'  id="past_button" onClick="toggle_button()">View Past Training programs</button>  
 </section>
+
 {% endif %}
+
+<div id="greyBackground" class="hidden">
+    <section id="creationForm">
+        <h1>Add Training Program</h1>
+
+        <form action="{% url 'hrapp:training_program_list' %}" method="post">
+        {% csrf_token %}
+      <fieldset>
+          <label for="title">Program Name: </label>
+          <input id="title" type="text" name="title" value="{{training_program.title}}">
+      </fieldset>
+      <fieldset>
+          <label for="start_date">Start Date: </label>
+          <input id="start_date" type="date" name="start_date" value="{{training_program.start_date}}">
+      </fieldset>
+      <fieldset>
+          <label for="end_date">End Date: </label>
+          <input id="end_date" type="date" name="end_date" value="{{training_program.end_date}}">
+      </fieldset>
+       <fieldset>
+          <label for="capacity">Capacity: </label>
+          <input id="capacity" type="integer" name="capacity" value="{{training_program.capacity}}">
+      </fieldset>
+
+            <input class="bangazonButton" type="submit" value="Create" />
+    </form>
+        <div class="formExit" onclick="toggleButton()">X</div>
+    </section>
+    </div>
+
 {% block javascript %}
     <script>
+
+    function toggleButton(){
+        document.getElementById('greyBackground').classList.toggle('hidden')
+    }
 
     function toggle_button() {
         document.getElementById("past").classList.toggle("hidden")

@@ -3,6 +3,8 @@
 
 {% block content %}
 
+<div id="greyBackground">
+<section id="creationForm">
 <h1>Purchase Computer</h1>
 
 <form action="{% url 'hrapp:computer_form' %}" method="post">
@@ -30,5 +32,6 @@
 </fieldset>
   <input class="bangazonButton" type="submit" value="Purchase Computer" />
 </form>
-
+</section>
+</div>
 {% endblock content %}

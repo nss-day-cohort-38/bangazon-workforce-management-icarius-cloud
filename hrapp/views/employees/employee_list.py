@@ -21,6 +21,7 @@ def employee_list(request):
             FROM hrapp_employee e
             JOIN hrapp_department d               
             ON e.department_id = d.id
+            ORDER BY e.first_name
             """)
 
             all_employees = []
@@ -36,10 +37,20 @@ def employee_list(request):
                 employee.department_name = row['name']
 
                 all_employees.append(employee)
+                
+                db_cursor.execute("""
+                select
+                    d.id,
+                    d.name
+                from hrapp_department d
+                """)
 
+                all_departments = db_cursor.fetchall()
+                
         template = 'employees/employees_list.html'
         context = {
-            'employees': all_employees
+            'employees': all_employees,
+            'all_departments': all_departments
         }
 
         return render(request, template, context)

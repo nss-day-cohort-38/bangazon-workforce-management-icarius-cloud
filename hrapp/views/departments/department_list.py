@@ -17,6 +17,7 @@ def department_list(request):
                 d.name,
                 d.budget
             FROM hrapp_department AS d
+            ORDER BY d.name
             """)
 
             all_departments = []
