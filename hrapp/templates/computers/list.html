@@ -42,19 +42,19 @@
                 {% csrf_token %}
               <fieldset>
                   <label for="manufacturer">Manufacturer: </label>
-                  <input id="manufacturer" type="text" name="manufacturer">
+                  <input required id="manufacturer" type="text" name="manufacturer">
               </fieldset>
               <fieldset>
                   <label for="make">Make: </label>
-                  <input id="make" type="text" name="make">
+                  <input required id="make" type="text" name="make">
               </fieldset>
               <fieldset>
                   <label for="purchase_date">Purchase Date: </label>
-                  <input id="purchase_date" type="date" name="purchase_date">
+                  <input required id="purchase_date" type="date" name="purchase_date">
               </fieldset>
               <fieldset>
                 <label for="employee">Assign to Employee: </label>
-                <select id="employee" type="text" name="employee">
+                <select required id="employee" type="text" name="employee">
                   <option value="" disabled selected>select</option>
                       {% for employee in employees %}
                           <option value={{ employee.id }}>{{ employee }} ({{employee.department_name}})</option>

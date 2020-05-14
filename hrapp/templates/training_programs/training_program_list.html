@@ -63,19 +63,19 @@ Training Programs
         {% csrf_token %}
       <fieldset>
           <label for="title">Program Name: </label>
-          <input id="title" type="text" name="title" value="{{training_program.title}}">
+          <input required id="title" type="text" name="title" value="{{training_program.title}}">
       </fieldset>
       <fieldset>
           <label for="start_date">Start Date: </label>
-          <input id="start_date" type="date" name="start_date" value="{{training_program.start_date}}">
+          <input required id="start_date" type="date" name="start_date" value="{{training_program.start_date}}">
       </fieldset>
       <fieldset>
           <label for="end_date">End Date: </label>
-          <input id="end_date" type="date" name="end_date" value="{{training_program.end_date}}">
+          <input required id="end_date" type="date" name="end_date" value="{{training_program.end_date}}">
       </fieldset>
        <fieldset>
           <label for="capacity">Capacity: </label>
-          <input id="capacity" type="integer" name="capacity" value="{{training_program.capacity}}">
+          <input required id="capacity" type="integer" name="capacity" value="{{training_program.capacity}}">
       </fieldset>
 
             <input class="bangazonButton" type="submit" value="Create" />
