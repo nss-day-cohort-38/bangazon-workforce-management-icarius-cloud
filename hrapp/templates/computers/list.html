@@ -14,23 +14,21 @@
     <section class="listContainer">
     {% for computer in all_computers %}
         {% if not computer.is_assigned and not computer.decommission_date %}
-        <div class="listItem">
+        <a class="listItem" href="{% url 'hrapp:computer' computer.id %}">
             <img class="listImage" src="{% static 'images/computer.png' %}">  
             <p>{{ computer.manufacturer }} {{ computer.make }}</p>
-            <a class="bangazonButton" href="{% url 'hrapp:computer' computer.id %}">Details</a>
-        </div>
+
+        </a>
         {% elif computer.is_assigned and not computer.decommission_date %}
-        <div class="listItem supervisor">
+        <a class="listItem supervisor" href="{% url 'hrapp:computer' computer.id %}">
             <img class="listImage" src="{% static 'images/computer.png' %}">  
             <p>{{ computer.manufacturer }} {{ computer.make }}</p>
-            <a class="bangazonButton" href="{% url 'hrapp:computer' computer.id %}">Details</a>
-        </div>
+        </a>
         {% elif computer.decommission_date %}
-        <div class="listItem decommissioned">
+        <a class="listItem decommissioned" href="{% url 'hrapp:computer' computer.id %}">
             <img class="listImage" src="{% static 'images/computer.png' %}">  
             <p>{{ computer.manufacturer }} {{ computer.make }} (DECOMMISSIONED)</p>
-            <a class="bangazonButton" href="{% url 'hrapp:computer' computer.id %}">Details</a>
-        </div>
+        </a>
         {% endif %}
     {% endfor %}
     </section>
