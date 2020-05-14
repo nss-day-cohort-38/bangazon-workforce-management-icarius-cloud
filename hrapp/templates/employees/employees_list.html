@@ -7,19 +7,17 @@
 <section class="listContainer">
     {% for employee in employees %}
         {% if employee.is_supervisor %}
-            <div class="listItem supervisor">
+            <a class="listItem supervisor" href="{% url 'hrapp:employee_details' employee.id %}">
                 <img class="listImage" src="{% static 'images/employee.png' %}">
                 <p>{{ employee }} (Supervisor)</p>
-                <p>Department: {{employee.department_name}}</p>
-                <a class="bangazonButton" href="{% url 'hrapp:employee_details' employee.id %}">Details</a> 
-            </div>
+                <p class="deptName">{{employee.department_name}}</p>
+            </a>
         {% else %}
-            <div class="listItem">
+            <a class="listItem" href="{% url 'hrapp:employee_details' employee.id %}">
                 <img class="listImage" src="{% static 'images/employee.png' %}">
                 <p>{{ employee }}</p>
-                <p>Department: {{employee.department_name}}</p>
-                <a class="bangazonButton" href="{% url 'hrapp:employee_details' employee.id %}">Details</a>
-            </div>
+                <p class="deptName">{{employee.department_name}}</p>
+            </a>
         {% endif %}
     {% endfor %}
 
