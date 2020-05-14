@@ -5,6 +5,7 @@
     position: fixed;
     top: 0;
     background-color: var(--bangazonBlack);
+    z-index: 1;
 }
 
 #logo {

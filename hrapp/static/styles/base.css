@@ -55,6 +55,13 @@ form .bangazonButton {
   justify-content: center;
   margin-top: 20px;
 }
+.bangazonButton.training{
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-self: center;
+}
 .hidden {
   display: none !important;
   transition: 2s ease;

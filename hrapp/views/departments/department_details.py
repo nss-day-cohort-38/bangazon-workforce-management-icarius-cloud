@@ -24,24 +24,25 @@ def get_department(department_name):
         """, (department_name,))
 
         response = db_cursor.fetchall()
-        print("***SDFVSER***", response)
         for row in response:
             if row == response[0]:
                 department = Department()
                 department.employees = []
                 department.name = row['name']
                 department.budget = row['budget']
-                employee = Employee()
-                employee.first_name = row['first_name']
-                employee.last_name = row['last_name']
-                employee.is_supervisor = row['is_supervisor']
-                department.employees.append(employee)
+                if not row['first_name'] == None:
+                    employee = Employee()
+                    employee.first_name = row['first_name']
+                    employee.last_name = row['last_name']
+                    employee.is_supervisor = row['is_supervisor']
+                    department.employees.append(employee)
             else:
                 employee = Employee()
                 employee.first_name = row['first_name']
                 employee.last_name = row['last_name']
                 employee.is_supervisor = row['is_supervisor']
                 department.employees.append(employee)
+        print(department.employees)
         return department
 
 # @login_required
