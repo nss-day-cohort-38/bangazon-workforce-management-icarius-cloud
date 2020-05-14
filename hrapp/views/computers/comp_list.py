@@ -1,6 +1,6 @@
 import sqlite3
 from django.shortcuts import render
-from hrapp.models import Computer
+from hrapp.models import Computer, Employee
 from ..connection import Connection
 
 
@@ -34,12 +34,37 @@ def computer_list(request):
                 computer.purchase_date = row['purchase_date']
                 computer.decommission_date = row['decommission_date']
                 computer.is_assigned = row['assign_date']
-                print(f"This is the computer {i}", computer.is_assigned)
                 all_computers.append(computer)
+
+            db_cursor.execute("""
+        SELECT
+            e.id,
+            e.first_name,
+            e.last_name,
+            e.department_id,
+            d.name,
+            ec.assign_date
+        FROM hrapp_employee AS e
+        JOIN hrapp_department AS d ON e.department_id = d.id
+        LEFT JOIN hrapp_employeecomputer AS ec ON ec.employee_id = e.id
+        WHERE ec.employee_id IS NULL
+        """)
+
+        all_employees = []
+        dataset = db_cursor.fetchall()
+        print(len(dataset))
+        for row in dataset:
+            employee = Employee()
+            employee.id = row['id']
+            employee.first_name = row['first_name']
+            employee.last_name = row['last_name']
+            employee.department_name = row['name']
+            all_employees.append(employee)
 
         template = 'computers/list.html'
         context = {
-            'all_computers': all_computers
+            'all_computers': all_computers,
+            'employees': all_employees
         }
 
         return render(request, template, context)
