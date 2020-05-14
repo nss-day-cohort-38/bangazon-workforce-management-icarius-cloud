@@ -1,7 +1,21 @@
-{% extends 'shared/base.html' %}
-{% load static %}
 
-{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" type="text/css" media="screen" />
+
+
+    <title>Details</title>
+</head>
+<body>
+    
+</body>
+</html>
+<div>
     <section class="detailsItem">
         <img class="detailsImage" src="{% static 'images/department.png' %}">
         <h1>{{ department.name }}</h1>
@@ -21,7 +35,10 @@
                    - {{employee}} -
                 {% endif %}
             {% endfor %}
+        
             </p>
         </div>
     </section>
-{% endblock content %}
+</div>
+</body>
+</html>

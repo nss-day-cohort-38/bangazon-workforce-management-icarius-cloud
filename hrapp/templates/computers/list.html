@@ -2,10 +2,11 @@
 {% load static %}
 
 {% block content %}
-    <h1 class="sectionHeader">Computers <a class='bangazonButton' href="{% url 'hrapp:computer_form' %}">Purchase Computer</a></h1>
+    <h1 class="sectionHeader">Computers <button class='bangazonButton' onclick="toggleButton()">Purchase Computer</button></h1>
 
-    <form action="{% url 'hrapp:computers' %}" method="post">
+    <form class="searchBar" action="{% url 'hrapp:computers' %}" method="post">
     {% csrf_token %}
+      <label for="searchfield">Search Computers:   </label>
       <input id="searchfield" name="searchfield" type="text" placeholder="Search">
     </form>
 
@@ -13,17 +14,63 @@
     {% for computer in all_computers %}
         {% if not computer.is_assigned and not computer.decommission_date %}
         <div class="listItem">
-        {% elif computer.is_assigned and not computer.decommission_date %}
-        <div class="listItem supervisor">
-        {% elif computer.decommission_date %}
-        <div class="listItem decommissioned">
-            <p>(DECOMMISSIONED)</p>
-        {% endif %}
             <img class="listImage" src="{% static 'images/computer.png' %}">  
             <p>{{ computer.manufacturer }} {{ computer.make }}</p>
             <a class="bangazonButton" href="{% url 'hrapp:computer' computer.id %}">Details</a>
         </div>
+        {% elif computer.is_assigned and not computer.decommission_date %}
+        <div class="listItem supervisor">
+            <img class="listImage" src="{% static 'images/computer.png' %}">  
+            <p>{{ computer.manufacturer }} {{ computer.make }}</p>
+            <a class="bangazonButton" href="{% url 'hrapp:computer' computer.id %}">Details</a>
+        </div>
+        {% elif computer.decommission_date %}
+        <div class="listItem decommissioned">
+            <img class="listImage" src="{% static 'images/computer.png' %}">  
+            <p>{{ computer.manufacturer }} {{ computer.make }} (DECOMMISSIONED)</p>
+            <a class="bangazonButton" href="{% url 'hrapp:computer' computer.id %}">Details</a>
+        </div>
+        {% endif %}
     {% endfor %}
     </section>
-    
+    <div id="greyBackground" class="hidden">
+        <section id="creationForm">
+            <h1>Purchase Computer</h1>
+        
+            <form action="{% url 'hrapp:computer_form' %}" method="post">
+                {% csrf_token %}
+              <fieldset>
+                  <label for="manufacturer">Manufacturer: </label>
+                  <input id="manufacturer" type="text" name="manufacturer">
+              </fieldset>
+              <fieldset>
+                  <label for="make">Make: </label>
+                  <input id="make" type="text" name="make">
+              </fieldset>
+              <fieldset>
+                  <label for="purchase_date">Purchase Date: </label>
+                  <input id="purchase_date" type="date" name="purchase_date">
+              </fieldset>
+              <fieldset>
+                <label for="employee">Assign to Employee: </label>
+                <select id="employee" type="text" name="employee">
+                  <option value="" disabled selected>select</option>
+                      {% for employee in employees %}
+                          <option value={{ employee.id }}>{{ employee }} ({{employee.department_name}})</option>
+                      {% endfor %}
+                </select>
+            </fieldset>
+              <input class="bangazonButton" type="submit" value="Purchase Computer" />
+            </form>
+            <div class="formExit" onclick="toggleButton()">X</div>
+        </section>
+        </div>
+
+    {% block javascript %}
+        <script>
+            function toggleButton(){
+                document.getElementById('greyBackground').classList.toggle('hidden')
+            }
+        </script>
+    {% endblock %}
 {% endblock content %}

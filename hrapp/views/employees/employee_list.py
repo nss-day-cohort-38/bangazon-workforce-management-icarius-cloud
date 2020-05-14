@@ -21,6 +21,7 @@ def employee_list(request):
             FROM hrapp_employee e
             JOIN hrapp_department d               
             ON e.department_id = d.id
+            ORDER BY e.first_name
             """)
 
             all_employees = []

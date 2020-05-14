@@ -20,6 +20,7 @@ def computer_list(request):
                 ec.assign_date
             FROM hrapp_computer AS c
             LEFT JOIN hrapp_employeecomputer AS ec ON c.id = ec.computer_id
+            ORDER BY c.manufacturer
             """)
 
             all_computers = []

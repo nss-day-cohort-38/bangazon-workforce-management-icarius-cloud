@@ -4,24 +4,62 @@
 
 #container{
     margin: 0 auto;
-    margin-top: 15px;
     width: 80vw;
     max-width:600px;
     height: 50vw;
     max-height: 400px;
     overflow:hidden;
     
-    animation:one 20s infinite;
+    animation:mrBoomer 17s infinite;
     position:relative;
     background-size:100% 100%;
-    transition: 2s ease;
-    transition-delay: 2s;
+    transition: 0.2s ease;
    
 }
 
-@keyframes one{
-    from{background-image:url("../images/BoomerMessage1.png");}
-    33%{background-image:url("../images/BoomerMessage1.png");}
-    66%{background-image:url("../images/BoomerMessage2.png");}
-    100%{background-image:url("../images/BoomerMessage3.png");}
+@keyframes mrBoomer{
+    0%{
+        background-image:url("../images/BoomerMessage1.png");
+        margin-top: 15px;
+    }
+    10%{
+        background-image:url("../images/BoomerMessage1.png");
+        margin-top: 0px;
+    }
+    20%{
+        background-image:url("../images/BoomerMessage1.png");
+        margin-top: 15px;
+    }
+    30%{
+        background-image:url("../images/BoomerMessage1.png");
+        margin-top: 0px;
+    }
+    40%{
+        background-image:url("../images/BoomerMessage2.png");
+        margin-top: 15px;
+    }
+    50%{
+        background-image:url("../images/BoomerMessage2.png");
+        margin-top: 0px;
+    }
+    60%{
+        background-image:url("../images/BoomerMessage2.png");
+        margin-top: 15px;
+    }
+    70%{
+        background-image:url("../images/BoomerMessage2.png");
+        margin-top: 0px;
+    }
+    80%{
+        background-image:url("../images/BoomerMessage3.png");
+        margin-top: 15px;
+    }
+    90%{
+        background-image:url("../images/BoomerMessage3.png");
+        margin-top: 0px;
+    }
+    100%{
+        background-image:url("../images/BoomerMessage3.png");
+        margin-top: 15px;
+    }
 }
