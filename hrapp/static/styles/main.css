@@ -25,6 +25,10 @@
     background-color: #07ace3 !important;
 }
 
+.decommissioned {
+    background-color: red !important;
+}
+
 .listImage{
     width: 30%;
 }

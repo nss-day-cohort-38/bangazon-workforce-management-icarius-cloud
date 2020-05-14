@@ -16,9 +16,10 @@ def computer_list(request):
                 c.make,
                 c.manufacturer,
                 c.purchase_date,
-                c.decommission_date
+                c.decommission_date,
+                ec.assign_date
             FROM hrapp_computer AS c
-            JOIN hrapp_employeecomputer AS ec 
+            LEFT JOIN hrapp_employeecomputer AS ec ON c.id = ec.computer_id
             """)
 
             all_computers = []
@@ -31,7 +32,8 @@ def computer_list(request):
                 computer.manufacturer = row['manufacturer']
                 computer.purchase_date = row['purchase_date']
                 computer.decommission_date = row['decommission_date']
-                print(f"This is the computer {i}", computer.decommission_date)
+                computer.is_assigned = row['assign_date']
+                print(f"This is the computer {i}", computer.is_assigned)
                 all_computers.append(computer)
 
         template = 'computers/list.html'
