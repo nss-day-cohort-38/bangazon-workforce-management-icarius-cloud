@@ -92,5 +92,6 @@ def assign_employee_form(request, employee_id):
                 VALUES (?, ?)
                 """,
                 (form_data['hidden_employee'], form_data['training_program'],))
-
-            return redirect(reverse('hrapp:employee_list'))
+            # return redirect(reverse('hrapp:employee_details', args=[employee_id]))
+            # Redirects based on kwargs or args that give the employee id
+            return redirect(reverse('hrapp:employee_details', kwargs={'employee_id':employee_id}))
