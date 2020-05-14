@@ -2,7 +2,8 @@
 
 {% block content %}
 
-
+<div id="greyBackground">
+    <section id="creationForm">
     {% if employee.id is not None %}
     <h1>Update Employee Information</h1>
         <form action="{% url 'hrapp:employee_details' employee.id %}" method="post">
@@ -68,4 +69,6 @@
             <input class="bangazonButton" type="submit" value="Create" />
         {% endif %}
     </form>
+</section>
+</div>
 {% endblock content %}
