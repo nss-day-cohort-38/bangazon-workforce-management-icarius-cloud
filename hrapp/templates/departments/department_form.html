@@ -9,11 +9,11 @@
     {% csrf_token %}
   <fieldset>
       <label for="name">Name: </label>
-      <input id="name" type="text" name="name">
+      <input id="name" type="text" name="name" required>
   </fieldset>
   <fieldset>
       <label for="budget">Budget: </label>
-      <input id="budget" type="float" name="budget">
+      <input id="budget" type="float" name="budget" required>
   </fieldset>
   <input type="submit" value="Create Department" />
 </form>

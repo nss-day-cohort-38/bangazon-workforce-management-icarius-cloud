@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <h1 class="sectionHeader">Departments <button class='bangazonButton' onclick="toggleButton()" >Add Department</button></h1>
 
 <section class="listContainer">
@@ -15,6 +16,22 @@
         <iframe name="{{department.name}}" id="{{department.id}}" class="detailsFrame hidden" src="{% url 'hrapp:department_details' department.name %}"></iframe>
     {% endfor %}
 </section>
+
+{% else %}
+
+<h1 class="sectionHeader">Departments</h1>
+
+<section class="listContainer">
+    {% for department in departments %}
+        <div class="listItem">
+           <img class="listImage" src="{% static 'images/department.png' %}">
+           <p>{{ department.name }} </p>
+        </div>
+    {% endfor %}
+</section>
+
+{% endif %}
+
 <div id="greyBackground" class="hidden">
 <section id="creationForm">
     <h1>Add Department</h1>
@@ -23,11 +40,11 @@
         {% csrf_token %}
       <fieldset>
           <label for="name">Name: </label>
-          <input id="name" type="text" name="name">
+          <input id="name" type="text" name="name" required>
       </fieldset>
       <fieldset>
           <label for="budget">Budget: </label>
-          <input id="budget" type="float" name="budget">
+          <input id="budget" type="float" name="budget" required>
       </fieldset>
       <input class="bangazonButton" type="submit" value="Create Department" />
     </form>
