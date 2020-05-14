@@ -1,14 +1,28 @@
-{% extends 'shared/base.html' %}
-{% load static %}
 
-{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" type="text/css" media="screen" />
+
+
+    <title>Details</title>
+</head>
+<body>
+    
+</body>
+</html>
+<div>
     <section class="detailsItem">
         <img class="detailsImage" src="{% static 'images/department.png' %}">
         <h1>{{ department.name }}</h1>
         <h3>Budget: ${{ department.budget }}</h2>
         <div>
-            {%for employee in department.employees %}
-                {%if employee.is_supervisor %}
+            {%for employee in department.employees  %}
+                {%if employee.is_supervisor and employee %}
                     <h4>Supervisor: </h6>
                     <p>{{employee}}</p>
                 {% endif %}
@@ -17,11 +31,14 @@
             <p>
             {%for employee in department.employees %}
                
-                {%if not employee.is_supervisor %}
+                {%if not employee.is_supervisor and not employee == None %}
                    - {{employee}} -
                 {% endif %}
             {% endfor %}
+        
             </p>
         </div>
     </section>
-{% endblock content %}
+</div>
+</body>
+</html>

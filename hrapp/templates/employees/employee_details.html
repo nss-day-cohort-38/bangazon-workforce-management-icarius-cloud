@@ -6,7 +6,7 @@
     {% if employee.is_supervisor %}
         <div class="detailsItem supervisor">
             <img class='detailsImage' src="{% static 'images/employee.png' %}">
-            <h1>{{ employee }} (SUPERVISOR)</h1>
+            <h1>{{ employee }} <br> (SUPERVISOR)</h1>
             <p>Department:{{ employee.department }}</p>
             <p>Hire Date:{{ employee.start_date }}</p>
             <form action="{% url 'hrapp:employee_edit_form' employee.id %}" method="GET">
