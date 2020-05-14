@@ -1,0 +1,21 @@
+{% extends 'shared/base.html' %}
+{%load static%}
+{% block content %}
+    <h1>Choose from eligible programs</h1>
+    
+    <form action="{%url 'hrapp:assign_employee_form' employee %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="hidden_employee" value={{employee}}>
+    {% comment %} The option tag is not considered an input field! {% endcomment %}
+    {% comment %} The select tag will hold the value of the option {% endcomment %}
+    <select name="training_program">
+    <option disabled selected>Select</option>
+        {%for program in programs%}
+             <option value={{program.id}}>{{program.title}}</option>
+        {%endfor%}
+    </select>
+    
+        
+    <input class="bangazonButton" type="submit"></input>
+    </form>
+{%endblock%}
