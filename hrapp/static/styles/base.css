@@ -1,7 +1,13 @@
+:root{
+  --bangazonBlack: #232f3e;
+  --bangazonOrange: #fea902;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'Arial',sans-serif;
+  color: var(--bangazonBlack);
 }
 
 .main-content {
@@ -25,10 +31,8 @@ body {
   border-color: #ca7c1b #a56616;
   border-radius: 3px;
   border: 1px solid;
-  width: 50%;
+
   max-width: 300px;
-  margin-left: auto;
-  margin-right: auto;
   padding: 3px;
   text-decoration: none;
   transition: 0.5s ease;
@@ -44,15 +48,21 @@ body {
 }
 
 form .bangazonButton {
-  width: 200px !important;
   margin-right: 5px;
 }
-
-.hidden {
-  display: none !important;
-}
-
-section button {
+.buttonContainer{
   display: flex;
   justify-content: center;
+  margin-top: 20px;
+}
+.bangazonButton.training{
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-self: center;
+}
+.hidden {
+  display: none !important;
+  transition: 2s ease;
 }

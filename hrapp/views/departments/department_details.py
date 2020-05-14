@@ -18,8 +18,8 @@ def get_department(department_name):
             e.first_name,
             e.last_name,
             e.is_supervisor
-        FROM hrapp_employee AS e
-        LEFT JOIN hrapp_department AS d ON e.department_id = d.id
+        FROM hrapp_department AS d
+        LEFT JOIN hrapp_employee AS e ON e.department_id = d.id
         WHERE d.name = ?
         """, (department_name,))
 
@@ -30,18 +30,19 @@ def get_department(department_name):
                 department.employees = []
                 department.name = row['name']
                 department.budget = row['budget']
-                employee = Employee()
-                employee.first_name = row['first_name']
-                employee.last_name = row['last_name']
-                employee.is_supervisor = row['is_supervisor']
-                department.employees.append(employee)
+                if not row['first_name'] == None:
+                    employee = Employee()
+                    employee.first_name = row['first_name']
+                    employee.last_name = row['last_name']
+                    employee.is_supervisor = row['is_supervisor']
+                    department.employees.append(employee)
             else:
                 employee = Employee()
                 employee.first_name = row['first_name']
                 employee.last_name = row['last_name']
                 employee.is_supervisor = row['is_supervisor']
                 department.employees.append(employee)
-        department.number = len(department.employees)
+        print(department.employees)
         return department
 
 # @login_required
