@@ -93,4 +93,4 @@ def assign_employee_form(request, employee_id):
                 """,
                 (form_data['hidden_employee'], form_data['training_program'],))
 
-            return redirect(reverse('employee_details/', employee_id))
+            return redirect(reverse('hrapp:employee_list'))
