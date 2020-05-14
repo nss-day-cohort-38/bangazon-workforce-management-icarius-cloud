@@ -12,13 +12,13 @@ def get_training_programs():
             db_cursor = conn.cursor()
 
             db_cursor.execute("""
-            select
+            SELECT
                 tp.id,
                 tp.title, 
                 tp.start_date, 
                 tp.end_date, 
                 tp.capacity
-            from hrapp_trainingprogram tp
+            FROM hrapp_trainingprogram tp
             """)
             dataset = db_cursor.fetchall()
             past_training_programs = []
