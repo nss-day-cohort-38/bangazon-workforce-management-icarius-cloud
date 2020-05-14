@@ -22,6 +22,11 @@
 {% else %}       
     <h1 class="sectionHeader">Computers</h1>
 
+    <form action="{% url 'hrapp:computers' %}" method="post">
+    {% csrf_token %}
+      <input id="searchfield" name="searchfield" type="text" placeholder="Search">
+    </form>
+    
     <section class="listContainer">
     {% for computer in all_computers %}
         <div class="listItem">
